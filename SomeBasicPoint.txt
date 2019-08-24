@@ -82,13 +82,13 @@
     };
     /* 使用 */
     Cache cache;        // 基类对象
-	ICache ic;          // 派生类对象
-	ic.show();          // 使用派生类成员函数
-	cache.show();       // 使用类成员函数
-	ICache *p1 = &ic;   // 派生类指针，指向派生类
-	p1->show();         // 使用派生类成员函数
-	Cache *p2 = &ic;    // 基类指针，指向派生类
-	p2->show();         // 使用派生类成员函数
+    ICache ic;          // 派生类对象
+    ic.show();          // 使用派生类成员函数
+    cache.show();       // 使用类成员函数
+    ICache *p1 = &ic;   // 派生类指针，指向派生类
+    p1->show();         // 使用派生类成员函数
+    Cache *p2 = &ic;    // 基类指针，指向派生类
+    p2->show();         // 使用派生类成员函数
     /* 输出 */
     Derived
     Base
