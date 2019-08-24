@@ -54,3 +54,43 @@
     （c）作用在全局变量前，表示该变量只能被本文件使用，不能被其它文件使用（因此其它文件也可以定义相同的变量名），且初始化为0
     （d）作用在类中的成员变量前，所有该类对象共享一份该变量，即该成员变量无论定义多少对象都只有一份
     （e）作用在类成员函数前，所有类对象共用该函数，且该函数不接受this指针，因此无法确定具体对象的成员变量，只能访问static的变量
+
+10. 在结构体的最后定义一个长度为0的字符数组的操作
+    在很多地方会看到定义结构体时，会在最后添加一个长度为0的char型数组，如下：
+    struct Buffer {
+        unsigned int a;
+        char p[0];
+    };
+    这里面的char p[0]不会影响结构体的大小，即sizeof(struct Buffer)任然为4；p只是指向内存中该结构体尾部后面的那一段内存，比如：
+    std::cout << sizeof(struct Buffer) << std::endl;
+	struct Buffer *buf = (struct Buffer *)malloc(sizeof(struct Buffer) + 20);   // 此处malloc多分配了20 字节，则p就会指向这部分的起始地址
+	buf->a = 2;
+	memcpy(buf->p, "kaito is the best", 18);
+	std::cout << buf->a << ' ' << buf->p << std::endl;
+	free(buf);
+
+11. 虚函数和多态
+    /* 基类 */
+    class Cache {
+    public:
+        virtual void show() { std::cout << "Base" << std::endl; }
+    };
+    /* 派生类 */
+    class ICache : public Cache {
+    public:
+        void show() { std::cout << "Derived" << std::endl; }
+    };
+    /* 使用 */
+    Cache cache;        // 基类对象
+	ICache ic;          // 派生类对象
+	ic.show();          // 使用派生类成员函数
+	cache.show();       // 使用类成员函数
+	ICache *p1 = &ic;   // 派生类指针，指向派生类
+	p1->show();         // 使用派生类成员函数
+	Cache *p2 = &ic;    // 基类指针，指向派生类
+	p2->show();         // 使用派生类成员函数
+    /* 输出 */
+    Derived
+    Base
+    Derived
+    Derived
