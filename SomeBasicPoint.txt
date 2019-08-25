@@ -63,11 +63,11 @@
     };
     这里面的char p[0]不会影响结构体的大小，即sizeof(struct Buffer)任然为4；p只是指向内存中该结构体尾部后面的那一段内存，比如：
     std::cout << sizeof(struct Buffer) << std::endl;
-	struct Buffer *buf = (struct Buffer *)malloc(sizeof(struct Buffer) + 20);   // 此处malloc多分配了20 字节，则p就会指向这部分的起始地址
-	buf->a = 2;
-	memcpy(buf->p, "kaito is the best", 18);
-	std::cout << buf->a << ' ' << buf->p << std::endl;
-	free(buf);
+    struct Buffer *buf = (struct Buffer *)malloc(sizeof(struct Buffer) + 20);   // 此处malloc多分配了20 字节，则p就会指向这部分的起始地址
+    buf->a = 2;
+    memcpy(buf->p, "kaito is the best", 18);
+    std::cout << buf->a << ' ' << buf->p << std::endl;
+    free(buf);
 
 11. 虚函数和多态
     /* 基类 */
@@ -96,18 +96,18 @@
     Derived
     注意：
     （a）构造函数不能设置为虚函数，但是析构函数可以设置成虚函数
-	（b）含有纯虚函数的类称为抽象类，抽象类不能用于定义对象，只能定义指针
+    （b）含有纯虚函数的类称为抽象类，抽象类不能用于定义对象，只能定义指针
 
 12. STL中的set
     set以RB-Tree作为底层容器
-	所得元素只有key，没有value，value就是key
-	不允许出现重复的键值
-	所有元素都会被自动排序
-	不能通过迭代器来改变set的值
+    所得元素只有key，没有value，value就是key
+    不允许出现重复的键值
+    所有元素都会被自动排序
+    不能通过迭代器来改变set的值
 
 13. STL中的map
     map以RB-Tree作为底层容器
-	所有元素都是key+value的存在
-	不允许出现重复的键值
-	所有元素都是通过key进行自动排序的
-	map的key是不能修改的，但是key所对应的value是可以修改的
+    所有元素都是key+value的存在
+    不允许出现重复的键值
+    所有元素都是通过key进行自动排序的
+    map的key是不能修改的，但是key所对应的value是可以修改的
