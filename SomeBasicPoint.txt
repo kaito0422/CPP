@@ -127,7 +127,9 @@
     }
     catch (exception &exp) {
         cerr << exp.what() << endl;
-        for (int i = 0; i < t; i++)
+        for (int i = 1; i < t; i++)
             delete p[i];
     }
-    std::cout << t * 4 << " MB has been allocated!" << std::endl;
+    p[0][4] = 1995;
+    std::cout << p[0][4] << std::endl;
+    std::cout << t * 4 << " MB has been allocated successfully!" << std::endl;
